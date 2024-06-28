@@ -1,66 +1,72 @@
-from django.shortcuts import render
-from django.views.generic import View
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from quizApp.models import *
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Quiz, Question, Answer
+from .forms import QuizForm, QuestionForm, AnswerForm
+from django.contrib.auth.decorators import login_required
 from django.views.generic import CreateView, UpdateView, ListView, DetailView
 from django.http  import HttpResponseRedirect 
 
 
-def index(request):
+
+def home(request):
     return render(request, 'quizApp/base.html')
 
 
-def add_quiz(request):
-    if request.method == "POST":
-        questions_name = request.POST.get('questions_name')
-        answer_name_1 = request.POST.get('answer_name_1')
-        answer_name_2 = request.POST.get('answer_name_2')
-        answer_name_3 = request.POST.get('answer_name_3')
-        answer_name_4 = request.POST.get('answer_name_4')
-
-        
-        addtask = Quiz(questions_name=questions_name, 
-                       answer_name_1=answer_name_1, 
-                       answer_name_2=answer_name_2, answer_name_3=answer_name_3,
-                       answer_name_4=answer_name_4)
-        addtask.save()
-        
-    return render (request, 'event/index.html')
 
 
+def create_quiz(request):
+    if request.method == 'POST':
+        form = QuizForm(request.POST)
+        if form.is_valid():
+            quiz = form.save(commit=False)
+            quiz.created_by = request.user
+            quiz.save()
+            return redirect('home')
+    else:
+        form = QuizForm()
+    return render(request, 'quizApp/add_quiz.html', {'form': form})
 
-# class LoginView(View):
-#     template_name = 'quizApp/login.html'
 
-#     def get(self, request):
-#         form = AuthenticationForm()
-#         return render(request, self.template_name, {'form': form})
+def edit_quiz(request, quiz_id):
+    quiz = get_object_or_404(Quiz, pk=quiz_id)
+    if request.method == 'POST':
+        form = QuizForm(request.POST, instance=quiz)
+        if form.is_valid():
+            form.save()
+            return redirect('base')
+    else:
+        form = QuizForm(instance=quiz)
+    return render(request, 'quizApp/edit_quiz.html', {'form': form, 'quiz': quiz})
 
-#     def post(self, request):
-#         form = AuthenticationForm(request, data=request.POST)
-#         if form.is_valid():
-#             user = form.get_user()
-#             login(request, user)
-#             return redirect('home')  
 
-# class LogoutView(View):
-#     def get(self, request):
-#         logout(request)
-#         return redirect('login')
+def delete_quiz(request, quiz_id):
+    quiz = get_object_or_404(Quiz, pk=quiz_id)
+    if request.method == 'POST':
+        quiz.delete()
+        return redirect('base')
+    return render(request, 'quizApp/delete_quiz.html', {'quiz': quiz})
 
-# class RegisterView(View):
-#     template_name = 'quizApp/register.html'
 
-#     def get(self, request):
-#         form = UserCreationForm()
-#         return render(request, self.template_name, {'form': form})
 
-#     def post(self, request):
-#         form = UserCreationForm(request.POST)
-#         if form.is_valid():
-#             user = form.save()
-#             login(request, user)
-#             return redirect('home') 
+class QuisListView(ListView):
+    model = Quiz
+    context_object_name = "quizs"
+    template_name = "quizApp/quiz_list.html"
 
+   
+# class QuisDetailView(DetailView):
+#     model = Task
+#     context_object_name = "task"
+#     template_name = "tasktrack_ap/taskdetail.html"
+
+
+# class CreateQuisView(CreateView):
+#     model = Task
+#     form_class = TaskForm
+#     template_name = 'tasktrack_ap/create_task.html'
+#     success_url = '/'
+
+
+# class QuisUpdateView(UpdateView):
+#   model = Task
+#   template_name = ""
+#   form_class = TaskForm  

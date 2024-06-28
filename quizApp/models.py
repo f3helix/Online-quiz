@@ -1,21 +1,26 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-
-
-# class User(models.Model):
-#     name = models.CharField(max_length = 200)
-#     surname = models.CharField(max_length = 200)
-
-
-
-
-
 class Quiz(models.Model):
-    questions_name = models.CharField(max_length = 200)
-    answer_name_1 = models.CharField(max_length = 200)
-    answer_name_2 = models.CharField(max_length = 200)
-    answer_name_3 = models.CharField(max_length = 200)
-    answer_name_4 = models.CharField(max_length = 200)
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.title
 
+class Question(models.Model):
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    text = models.TextField()
+    time_limit = models.PositiveIntegerField(default=30)  
+    def __str__(self):
+        return self.text
+
+class Answer(models.Model):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    text = models.CharField(max_length=200)
+    is_correct = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.text

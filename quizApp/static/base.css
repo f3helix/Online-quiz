@@ -1,0 +1,45 @@
+/* Стилі для заголовка h1 */
+h1 {
+    color: blue;
+    font-family: Arial, sans-serif;
+    font-size: 24px;
+}
+
+/* Стилі для абзаців p */
+p {
+    color: red;
+    font-family: Helvetica, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+body{
+    background-color: cadetblue;
+}
+/* Стилі для контейнера .container-sm */
+.container-sm {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    background-color: #fff;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+}
+
+
+.quiz{
+    border: 1px solid grey;
+}
