@@ -1,11 +1,16 @@
 {% extends 'base.html'%}
 {% block content %}
+<div class="row mt-4"> 
 {% for quiz in quizs%}
-<div class="quiz"> 
-{{quiz.title}} <br>
-{{quiz.description}} <br>
-</div>
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">{{quiz.title}}</h5>
+      <p class="card-text">{{quiz.description}}</p>
+      <a href="#" class="btn btn-primary">Переглянути</a>
+    </div>
+  </div>
 {% endfor %}
+</div>
 {% endblock %}
 
   
