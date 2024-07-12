@@ -18,10 +18,25 @@ def create_quiz(request):
         print(request.POST)
         title = request.POST.get('title')
         description = request.POST.get('description')
+   
         quiz = Quiz(title=title, description=description, created_by=request.user)
         quiz.save()
         
     return render (request, 'quizApp/add_quiz.html')
+
+def create_question(request):
+    quizs = Quiz.objects.all()
+
+    if request.method == "POST":
+        print(request.POST)
+        quiz = request.POST.get('quiz')
+        text = request.POST.get('text')
+        time_limit = request.POST.get('time_limit')
+        quiz = get_object_or_404(Quiz, pk=quiz)
+        question = Question(quiz=quiz, text=text, time_limit=time_limit)
+        question.save()
+        
+    return render (request, 'quizApp/add_question.html', {"quizs": quizs})
 
 
 class QuisListView(ListView):
@@ -29,7 +44,16 @@ class QuisListView(ListView):
     context_object_name = "quizs"
     template_name = "quizApp/quiz_list.html"
 
-   
+class QuestionListView(ListView):
+    model = Quiz
+    context_object_name = "questions"
+    template_name = "quizApp/questions_list.html"
+
+class AnswerListView(ListView):
+    model = Quiz
+    context_object_name = "answers"
+    template_name = "quizApp/answers_list.html"
+
 
 
 
@@ -37,6 +61,12 @@ class CreateQuisView(CreateView):
     model = Quiz
     form_class = QuizForm
     template_name = 'quizApp/add_quiz.html'
+    success_url = '/'
+
+class CreateQuestionView(CreateView):
+    model = Question
+    form_class = QuestionForm
+    template_name = 'quizApp/add_question.html'
     success_url = '/'
 
 
