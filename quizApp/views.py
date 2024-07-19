@@ -38,6 +38,21 @@ def create_question(request):
         
     return render (request, 'quizApp/add_question.html', {"quizs": quizs})
 
+def create_answer(request):
+    questions = Question.objects.all()
+    print(questions)
+    if request.method == "POST":
+        print(request.POST)
+        question = request.POST.get('question')
+        text_answer = request.POST.get('text_answer')
+        is_correct = request.POST.get('is_correct')
+        in_correct = request.POST.get('in_correct')
+        question = get_object_or_404(Question, pk=question)
+        answer = Answer(question=question, text_answer=text_answer, is_correct=is_correct,in_correct=in_correct)
+        answer.save()
+        
+    return render (request, 'quizApp/add_answers.html', {"questions": questions})
+
 
 class QuisListView(ListView):
     model = Quiz
@@ -67,6 +82,12 @@ class CreateQuestionView(CreateView):
     model = Question
     form_class = QuestionForm
     template_name = 'quizApp/add_question.html'
+    success_url = '/'
+
+class CreateAnswersView(CreateView):
+    model = Answer
+    form_class = AnswerForm
+    template_name = 'quizApp/add_answers.html'
     success_url = '/'
 
 

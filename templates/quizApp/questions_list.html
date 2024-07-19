@@ -17,5 +17,19 @@
     <main class="container-sm">
 </body> 
       
+{% block content %}
+<div class="row mt-4"> 
 {% for question in questions%}
+
+
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">{{questions.text}}</h5>
+      <p class="card-text">{{questions.time_limit}}</p>
+      <a href="#" class="btn btn-primary">Розпочати вікторину</a>
+    </div>
+  </div>
+
 {% endfor %}
+</div>
+{% endblock %}
