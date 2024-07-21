@@ -12,5 +12,6 @@ urlpatterns = [
     path('add_answers', quizApp.create_answer, name = 'add_answers'),
 
 
-    path('questions_list', QuestionListView.as_view(), name = 'questions_list')
+    path('questions_list', QuestionListView.as_view(), name = 'questions_list'),
+    path('answers_list', AnswerListView.as_view(), name = 'answers_list')
 ]

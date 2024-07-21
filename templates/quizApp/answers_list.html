@@ -1,3 +1,4 @@
+{% extends 'questions_list.html'%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,5 +18,18 @@
     <main class="container-sm">
 </body> 
 
+
+{% block content %}
+<div class="row mt-4"> 
 {% for answer in answers%}
+
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">{{answers.text_answer}}</h5>
+      <a href="#" class="btn btn-primary">Розпочати вікторину</a>
+    </div>
+  </div>
+
 {% endfor %}
+</div>
+{% endblock %}
