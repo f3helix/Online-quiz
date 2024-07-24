@@ -1,3 +1,4 @@
+from typing import Any
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Quiz, Question, Answer
 from .forms import QuizForm, QuestionForm, AnswerForm
@@ -54,6 +55,7 @@ def create_answer(request):
     return render (request, 'quizApp/add_answers.html', {"questions": questions})
 
 
+#list
 class QuisListView(ListView):
     model = Quiz
     context_object_name = "quizs"
@@ -70,8 +72,7 @@ class AnswerListView(ListView):
     template_name = "quizApp/answers_list.html"
 
 
-
-
+#create
 class CreateQuisView(CreateView):
     model = Quiz
     form_class = QuizForm
@@ -89,6 +90,29 @@ class CreateAnswersView(CreateView):
     form_class = AnswerForm
     template_name = 'quizApp/add_answers.html'
     success_url = '/'
+
+
+#detail
+class QuisDetailView(DetailView):
+    model = Quiz
+    context_object_name = "quiz"
+    template_name = "quizApp/questions_list.html"
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context['questions'] = Question.objects.all()
+        return super().get_context_data(**kwargs)
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -126,10 +150,7 @@ class CreateAnswersView(CreateView):
 
 
 
-# class QuisDetailView(DetailView):
-#     model = Task
-#     context_object_name = "task"
-#     template_name = "tasktrack_ap/taskdetail.html"
+
 
 
 # class QuisUpdateView(UpdateView):

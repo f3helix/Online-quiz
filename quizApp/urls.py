@@ -13,5 +13,8 @@ urlpatterns = [
 
 
     path('questions_list', QuestionListView.as_view(), name = 'questions_list'),
-    path('answers_list', AnswerListView.as_view(), name = 'answers_list')
+    path('answers_list', AnswerListView.as_view(), name = 'answers_list'),
+    path('quiz_detail/<int:pk>', QuisDetailView.as_view(), name = 'quiz_detail'),
 ]
+
+
