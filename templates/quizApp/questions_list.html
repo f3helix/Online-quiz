@@ -15,7 +15,7 @@
     <header>
         {% include 'quizApp/menu.html' %}
     </header>
-<h1>{{quiz.title}}</h1>
+
 
 <main class="container-sm">
   <h4>{{quiz.title}}</h4>
@@ -25,8 +25,9 @@
 
 <div class="card" style="width: 18rem;">
     <div class="card-body">
-      <h5 class="card-title">{{questions.text}}</h5>
-      <p class="card-text">{{questions.time_limit}}</p>
+      
+      <h5 class="card-title">{{question.text}}</h5>
+      <p class="card-text">Час на виконання: {{question.time_limit}} хвилина</p>
       
       <a href="#" class="btn btn-primary">Розпочати вікторину</a>
     </div>

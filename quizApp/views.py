@@ -97,10 +97,11 @@ class QuisDetailView(DetailView):
     model = Quiz
     context_object_name = "quiz"
     template_name = "quizApp/questions_list.html"
+
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        context['questions'] = Question.objects.all()
-        return super().get_context_data(**kwargs)
+        context['questions'] = self.object.question_set.all()
+        return context
 
 
 
