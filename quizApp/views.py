@@ -1,6 +1,6 @@
 from typing import Any
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Quiz, Question, Answer
+from .models import Quiz, Question, Answer, UserAnswer
 from .forms import QuizForm, QuestionForm, AnswerForm
 from django.contrib.auth.decorators import login_required
 from django.views.generic import CreateView, UpdateView, ListView, DetailView
@@ -102,9 +102,24 @@ class QuisDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['questions'] = self.object.question_set.all()
         return context
+    
+class QuestionDetailView(DetailView):
+    model = Question
+    context_object_name = "question"
+    template_name = "quizApp/answers_list.html"
+
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context['answers'] = self.object.answer_set.all()
+        return context
 
 
 
+class CreateSaweAnswersView(CreateView):
+    model = UserAnswer
+    form_class = AnswerForm
+    template_name = 'quizApp/result.html'
+    success_url = '/'
 
 
 

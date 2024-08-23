@@ -16,3 +16,8 @@ class AnswerForm(forms.ModelForm):
     class Meta:
         model = Answer
         fields = ("question", "text_answer", "is_correct")
+
+class UserAnswerForm(forms.ModelForm):
+    class Meta:
+        model = UserAnswer
+        fields = ("quiz", "question", "answer", "user")

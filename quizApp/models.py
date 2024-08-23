@@ -25,3 +25,10 @@ class Answer(models.Model):
 
     def __str__(self):
         return self.text_answer
+
+
+class UserAnswer(models.Model):
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    answer = models.ForeignKey(Answer, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)

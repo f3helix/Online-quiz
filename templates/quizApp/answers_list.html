@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,21 +15,32 @@
     <header>
         {% include 'quizApp/menu.html' %}
     </header>
-    <main class="container-sm">
-</body> 
+    <style>
+      body{
+          background-image: url('https://www.memberspace.com/wp-content/uploads/2024/04/quiz-tools-1-1024x536.png');
+      }
+  </style>
 
 
-{% block content %}
+<main class="container-sm">
+
+<h4>{{quiz.title}}</h4>
+<h4>{{question.text}}</h4>
 <div class="row mt-4"> 
 {% for answer in answers%}
 
-<div class="card" style="width: 18rem;">
+
+<div class="card mb-3" style="width: 25rem;">
     <div class="card-body">
+      
       <h5 class="card-title">{{answer.text_answer}}</h5>
-      <a href="#" class="btn btn-primary">Розпочати вікторину</a>
+ 
+      <form action="" method="post"></form>  
+      <a href="{% url 'sawe_answer'%}" class="btn btn-primary">Відповісти</a>
     </div>
   </div>
 
 {% endfor %}
 </div>
-{% endblock %}
+
+</body> 

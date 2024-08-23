@@ -15,6 +15,8 @@ urlpatterns = [
     path('questions_list', QuestionListView.as_view(), name = 'questions_list'),
     path('answers_list', AnswerListView.as_view(), name = 'answers_list'),
     path('quiz_detail/<int:pk>', QuisDetailView.as_view(), name = 'quiz_detail'),
+    path('question_detail/<int:pk>', QuestionDetailView.as_view(), name = 'question_detail'),
+     path('/', CreateSaweAnswersView.as_view(), name= 'sawe_answer'),
 ]
 
 

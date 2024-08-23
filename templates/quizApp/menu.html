@@ -1,16 +1,42 @@
+<head>
+  <style>
+    .navbar {
+        background-color: #cd3d3f; /* Змініть на ваш колір фону */
+        padding: 10px; /* Відступи від країв */
+    }
+
+    .navbar-brand {
+        font-size: 1.5rem; /* Розмір шрифту для бренду */
+        color: #000000; /* Колір тексту бренду */
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 1rem; /* Розмір шрифту для посилань */
+        color: #555; /* Колір тексту посилань */
+        margin-right: 15px; /* Горизонтальний відступ між посиланнями */
+    }
+
+  
+
+    .navbar-toggler-icon {
+        background-color: #f9f9f9; /* Колір іконки бургер-меню */
+    }
+</style>
+
+</head>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="{% url 'quiz_list' %}">Головна</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-link active" aria-current="page" href="{% url 'add_quiz' %}">Додати вікторину</a>
-        <a class="nav-link" href="{% url 'add_question' %}">Додати питання</a>
-        <a class="nav-link" href="{% url 'add_answers' %}">Додати відповіді на питання</a>
-        <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+      <a class="navbar-brand" href="{% url 'quiz_list' %}">Головна</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+              <a class="nav-link active" aria-current="page" href="{% url 'add_quiz' %}">Додати вікторину</a>
+              <a class="nav-link" href="{% url 'add_question' %}">Додати питання</a>
+              <a class="nav-link" href="{% url 'add_answers' %}">Додати відповіді на питання</a>
+           
+          </div>
       </div>
-    </div>
   </div>
 </nav>

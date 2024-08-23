@@ -15,6 +15,12 @@
     <header>
         {% include 'quizApp/menu.html' %}
     </header>
+    <style>
+      body{
+          background-image: url('https://www.memberspace.com/wp-content/uploads/2024/04/quiz-tools-1-1024x536.png');
+      }
+  </style>
+  </style>
 
 
 <main class="container-sm">
@@ -23,13 +29,13 @@
 {% for question in questions%}
 
 
-<div class="card" style="width: 18rem;">
+<div class="card mb-3" style="width: 25rem;">
     <div class="card-body">
       
       <h5 class="card-title">{{question.text}}</h5>
       <p class="card-text">Час на виконання: {{question.time_limit}} хвилина</p>
       
-      <a href="#" class="btn btn-primary">Розпочати вікторину</a>
+      <a href="{% url 'question_detail' question.pk %}" class="btn btn-primary">Переглянути</a>
     </div>
   </div>
 
